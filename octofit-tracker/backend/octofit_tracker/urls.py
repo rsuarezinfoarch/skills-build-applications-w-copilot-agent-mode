@@ -30,12 +30,15 @@ router.register(r'workouts', WorkoutViewSet)
 
 @api_view(['GET'])
 def api_root(request):
+    import os
+    codespace_name = os.environ.get('CODESPACE_NAME', 'localhost')
+    api_base_url = f"https://{codespace_name}-8000.app.github.dev/api/"
     return Response({
-        'users': '/users/',
-        'teams': '/teams/',
-        'activities': '/activities/',
-        'leaderboard': '/leaderboard/',
-        'workouts': '/workouts/',
+        'users': f'{api_base_url}users/',
+        'teams': f'{api_base_url}teams/',
+        'activities': f'{api_base_url}activities/',
+        'leaderboard': f'{api_base_url}leaderboard/',
+        'workouts': f'{api_base_url}workouts/',
     })
 
 urlpatterns = [
